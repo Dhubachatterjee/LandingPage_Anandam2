@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Listing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --white: #ffffff;
+      --bright-red: #ff3333;
+      --yellow: #ffeb3b;
+      --black: #000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--white);
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: var(--white);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .logo img {
+      height: 30px;
+    }
+
+    header .logo span {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--bright-red);
+    }
+
+    header .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    header .menu a,
+    header .menu span {
+      color: var(--bright-red);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+
+    header .menu a:hover,
+    header .menu span:hover {
+      background-color: var(--bright-red);
+      color: var(--white);
+    }
+
+    .location img {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+    .farmhouse-button {
+      background-color: var(--bright-red);
+      color: var(--white);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .farmhouse-button:hover {
+      background-color: var(--yellow);
+      color: var(--bright-red);
+    }
+
+    .amenities-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 40px;
+  column-gap: 20%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.amenities-item {
+  width: calc(33.33% - 20%);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+    main {
+      padding: 20px 30px;
+    }
+
+    .listing-header {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-preview {
+      position: relative;
+      display: flex;
+      gap: 10px;
+    }
+
+    .gallery-preview .large {
+      flex: 2;
+    }
+
+    .gallery-preview .small {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .amenities-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.amenities-gallery img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.amenities-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.amenities-item {
+  text-align: center;
+}
+
+.amenities-item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+
+  .close-modal {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+    .gallery-preview img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .photo-count {
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.photo-count:hover {
+  background-color: var(--bright-red);
+  color: var(--white);
+}
+
+.amenities-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20%;
+  justify-content: center;
+}
+
+.amenities-item {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+
+
+    .photo-count {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: var(--white);
+      color: var(--bright-red);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .listing-info-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .listing-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .right-info {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .price {
+      font-size: 28px;
+    }
+
+    .price .prefix {
+      color: var(--black);
+      font-style: italic;
+      font-weight: normal;
+      font-size: 20px;
+    }
+
+    .price .amount {
+      font-weight: bold;
+      color: var(--bright-red);
+    }
+
+    .appointment {
+      background: var(--white);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .appointment h3 {
+      margin-bottom: 10px;
+    }
+
+    .appointment button {
+      padding: 10px;
+      background-color: var(--bright-red);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .about {
+      margin-top: 30px;
+    }
+
+    .about h2 {
+      margin-bottom: 10px;
+      color: var(--bright-red);
+    }
+
+    .extra-sections {
+      margin-top: 40px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      color: var(--bright-red);
+    }
+
+    .location img {
+        width: 700px;
+        height: 700px;
+        object-fit: cover;
+        border-radius: 8px;
+        height: auto;
+        border-radius: 8px;
+        position: center;
+        display: block;
+        margin: 0% auto;
+    }
+
+    .image-gallery {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .image-gallery img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+    .image-gallery img {
+      width: calc(33.333% - 10px);
+      border-radius: 8px;
+    }
+
+    .contact-section {
+      background-color: var(--black);
+      color: var(--white);
+      padding: 50px 30px;
+    }
+
+    .contact-section h2 {
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .contact-details p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logowhite.jpeg" alt="Logo">
+      <span>ANANDAM RESIDENCY</span>
+    </div>
+    <div class="menu">
+      <a href="#location">Location</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#contact">Contact Us</a>
+      <button class="farmhouse-button">FARMHOUSE</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="listing-header">
+        <div class="gallery-preview">
+          <div class="large"><img src="gate1.jpeg" alt="Large Preview"></div>
+          <div class="small">
+            <img src="10.jpeg" alt="Small 1">
+            <img src="11.jpeg" alt="Small 2">
+          </div>
+          <div class="photo-count" id="openGallery">
+            <i class="fas fa-camera"></i> +25 images
+          </div>
+        </div>
+      </div>
+      
+      <div id="galleryModal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal" id="closeGallery">&times;</span>
+          <div class="image-gallery">
+            <img src="12.jpeg" alt="Gallery Image">
+            <img src="13.jpeg" alt="Gallery Image">
+            <img src="14.jpeg" alt="Gallery Image">
+            <img src="15.jpeg" alt="Gallery Image">
+            <img src="16.jpeg" alt="Gallery Image">
+            <img src="17.jpeg" alt="Gallery Image">
+            <img src="18.jpeg" alt="Gallery Image">
+            <img src="19.jpeg" alt="Gallery Image">
+            <img src="20.jpeg" alt="Gallery Image">
+            <img src="21.jpeg" alt="Gallery Image">
+            <img src="22.jpeg" alt="Gallery Image">
+            <img src="23.jpeg" alt="Gallery Image">
+            <img src="24.jpeg" alt="Gallery Image">
+            <img src="25.jpeg" alt="Gallery Image">
+            <img src="26.jpeg" alt="Gallery Image">
+            <img src="27.jpeg" alt="Gallery Image">
+            <img src="28.jpeg" alt="Gallery Image">
+            <img src="29.jpeg" alt="Gallery Image">
+            <img src="30.jpeg" alt="Gallery Image">
+            <img src="31.jpeg" alt="Gallery Image">
+            <img src="32.jpeg" alt="Gallery Image">
+            <img src="33.jpeg" alt="Gallery Image">
+            <img src="34.jpeg" alt="Gallery Image">
+            <img src="35.jpeg" alt="Gallery Image">
+            <img src="36.jpeg" alt="Gallery Image">
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const openGallery = document.getElementById('openGallery');
+        const galleryModal = document.getElementById('galleryModal');
+        const closeGallery = document.getElementById('closeGallery');
+      
+        openGallery.addEventListener('click', () => {
+          galleryModal.style.display = 'flex';
+        });
+      
+        closeGallery.addEventListener('click', () => {
+          galleryModal.style.display = 'none';
+        });
+      
+        window.addEventListener('click', (e) => {
+          if (e.target === galleryModal) {
+            galleryModal.style.display = 'none';
+          }
+        });
+      </script>
+
+
+    <div class="listing-info-container">
+      <div class="about listing-info">
+        <h2>About Anandam Residency</h2>
+        <p>As the best township in Asansol, we are proud to offer a variety of modern home designs for Simplex and Duplex Bungalows that cater to the diverse needs of our residents. From open layouts with plenty of room to entertain, to our Active Adult style homes with all modern facilities, we ensure that every resident finds a home that suits their lifestyle. In addition to our exceptional residential options, we also offer a range of amenities, including a well-equipped fitness center, landscaped gardens, and a community clubhouse, all designed to provide residents with a comfortable and luxurious lifestyle. Furthermore, we understand the importance of accessibility and affordability, which is why we offer affordable low price plots, ensuring that everyone can experience the exceptional living experience at Anandam Residency.</p>
+        <p>Anandam offers a diverse range of plot areas to suit various needs. Whether you're looking for a compact space or a more expansive one, Anandam has options to cater to your preferences. Explore our plot area ranges and find the perfect fit for your dream home.
+            - 1500 Sq. Ft ( 50 ft X 30 ft )
+            - 1750 Sq. Ft ( 50 ft x 35 ft )
+            - 2000 Sq. Ft (50 ft x 40 ft )
+            - 2500 Sq. Ft (50 ft x 50 ft )</p>
+            <p>Our roads are a vital part of the society, designed to provide safe and convenient transportation for residents and visitors alike. These roads are thoughtfully planned to ensure easy accessibility to various amenities and facilities within the neighborhood. The Road sizes varies from 18ft to 25ft wide with proper functioning drainages along side.</p>
+      </div>
+      <div class="right-info">
+        <p class="price"><span class="prefix">2 BHK Bungalow Starts at Just </span>Rs. 30 Lakhs</p>
+        <div class="appointment">
+          <h3>Thinking of buying?</h3>
+          <button>Call or Whatsapp on +91 9239082783 for more details!</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="extra-sections">
+      <div class="section location" id="location">
+        <h2>Location</h2>
+        <img src="Map Location.jpg" alt="Location Image">
+      </div>
+
+      <div class="section gallery" id="gallery">
+        <h2>Gallery</h2>
+        <div class="image-gallery">
+          <img src="1.jpeg" alt="Gallery Image">
+          <img src="2.jpeg" alt="Gallery Image">
+          <img src="3.jpeg" alt="Gallery Image">
+          <img src="4.jpeg" alt="Gallery Image">
+          <img src="5.jpeg" alt="Gallery Image">
+          <img src="6.jpeg" alt="Gallery Image">
+          <img src="7.jpeg" alt="Gallery Image">
+          <img src="8.jpeg" alt="Gallery Image">
+          <img src="9.jpeg" alt="Gallery Image">
+        </div>
+      </div>
+
+
+      <!--Amenities-->
+      <div class="section amenities" id="amenities">
+        <h2>Amenities</h2>
+        <div class="amenities-gallery">
+          <div class="amenities-item">
+            <img src="seniorcitizen.svg" alt="Senior Citizen Area">
+            <p>Senior Citizen Area</p>
+          </div>
+          <div class="amenities-item">
+            <img src="kids.svg" alt="Children's Play Area">
+            <p>Children's Play Area</p>
+          </div>
+          <div class="amenities-item">
+            <img src="swimming-pool.svg" alt="Swimming Pool">
+            <p>Swimming Pool</p>
+          </div>
+          <div class="amenities-item">
+            <img src="amphitheatre.svg" alt="Community Hall">
+            <p>Community Hall</p>
+          </div>
+          <div class="amenities-item">
+            <img src="gym.svg" alt="Open Gym">
+            <p>Open Gym</p>
+          </div>
+          <div class="amenities-item">
+            <img src="sport.svg" alt="Landscaped Garden">
+            <p>Sports Area</p>
+          </div>
+        </div>
+      </div>
+      
+      
+  </main>
+
+  <div class="contact-section" id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-details">
+      <p><strong>Address:</strong> Anandam Residency, Panchgachhiya Road, towards Dumka State Highway, Asansol-713341</p>
+      <p><strong>Phone:</strong> +91 8777827497</p>
+      <p><strong>Email:</strong> contact@anandamasansol.in<br>sales@anandamasansol.in</p>
+      <p><strong>Business Hours:</strong> MON-SUN: 9 AM to 6 PM</p>
+    </div>
+  </div>
+</body>
+
+</html>
