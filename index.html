@@ -491,17 +491,23 @@ img {
 
   <main>
     <div class="listing-header">
-        <div class="gallery-preview">
-          <div class="large"><img src="gate1.jpeg" alt="Large Preview"></div>
-          <div class="small">
-            <img src="10.jpeg" alt="Small 1">
-            <img src="11.jpeg" alt="Small 2">
-          </div>
-          <div class="photo-count" id="openGallery">
-            <i class="fas fa-camera"></i> +25 images
-          </div>
+      <div class="gallery-preview">
+        <div class="large">
+          <video width="100%" height="auto" autoplay muted loop controls>
+            <source src="Video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="small">
+          <img src="10.jpeg" alt="Small 1">
+          <img src="11.jpeg" alt="Small 2">
+        </div>
+        <div class="photo-count" id="openGallery">
+          <i class="fas fa-camera"></i> +25 images
         </div>
       </div>
+    </div>
+    
       
       <div id="galleryModal" class="modal">
         <div class="modal-content">
