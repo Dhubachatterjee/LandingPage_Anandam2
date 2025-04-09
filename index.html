@@ -41,6 +41,93 @@
       gap: 10px;
     }
 
+    /* Mobile styles (phones) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header .menu {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .gallery-preview {
+    flex-direction: column;
+  }
+
+  .listing-info-container {
+    flex-direction: column;
+  }
+
+  .right-info {
+    align-items: flex-start;
+  }
+
+  .location img,
+  .image-gallery img,
+  .amenities-gallery img {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .image-gallery img {
+    width: 100%;
+  }
+
+  .gallery-preview .small {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .gallery-preview .small img {
+    width: 48%;
+    height: auto;
+  }
+
+  .amenities-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gallery-preview {
+    flex-direction: column;
+  }
+
+  .gallery-preview .small {
+    flex-direction: row;
+  }
+
+  .image-gallery img,
+  .amenities-gallery img {
+    width: 45%;
+  }
+
+  .amenities-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+.amenities-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  justify-content: center;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
     header .logo img {
       height: 30px;
     }
